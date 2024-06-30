@@ -1,4 +1,6 @@
 import React,{ PureComponent } from "react"
+import TodoDoneList from "./TodoDoneList"
+import Todolist from "./TodoList"
 
 class Todo  extends PureComponent {
     state = { 
@@ -74,14 +76,14 @@ class Todo  extends PureComponent {
                     <button type="submit">Add task</button>
                 </form>
 
-                <TodoList
+                <Todolist
                     tasks={tasks}
                     handleDelete={this.handleDelete}
                     handleDone={this.handleDone}
                 />
                 <h1>Done Tasks</h1>
                 
-                <DoneTasks
+                <TodoDoneList
                     donetasks={doneTasks}
                     delateTaskDone={this.handleDoneDelete}
                     handlereset= {this.handleReset}
@@ -91,34 +93,4 @@ class Todo  extends PureComponent {
     }
 }
 
-const TodoList = React.memo(({tasks,handleDelete,handleDone}) => {
-    return(
-        <ul>
-            {tasks.map((task,index) => {
-                <li key={index}>
-                    <h1>{task.task}</h1>
-                    <button onClick={() => handleDelete(index)}>delete</button>
-                    <button onClick={() => handleDone(index)}>done</button>
-                </li>
-            })}
-        </ul>
-    )
-    
-})
-
-const DoneTasks = React.memo(({donetasks,delateTaskDone,handlereset}) => {
-    return(
-        <ul>
-            {donetasks.map((task,index) => {
-                <li key={index}>
-                    <h1>{task.task}</h1>
-                    <button onClick={() => delateTaskDone(index)}>delete</button>
-                    <button onClick={() => handlereset(index)}>reset</button>
-                </li>
-            })}
-        </ul>
-    )
-    
-})
- 
 export default Todo;
